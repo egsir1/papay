@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const router = require("./router");
 
-// MongoDB ni call qilamiz
+// // MongoDB ni call qilamiz
 
-const db = require("./server").db();
-const mongodb = require("mongodb");
+// const db = require("./server").db();
+// const mongodb = require("mongodb");
 
 //1: Kirish code
 
