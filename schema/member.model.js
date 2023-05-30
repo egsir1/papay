@@ -22,6 +22,7 @@ const memberSchema = new mongoose.Schema(
       select: false,
     },
     mb_type: {
+      type: String,
       required: false,
       default: "USER",
       enum: {
@@ -30,6 +31,7 @@ const memberSchema = new mongoose.Schema(
       },
     },
     mb_status: {
+      type: String,
       required: false,
       default: "ACTIVE",
       enum: {
