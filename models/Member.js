@@ -2,6 +2,7 @@ const MemberModel = require("../schema/member.model");
 const Definer = require("../lib/errors");
 
 const assert = require("assert");
+const bcrypt = require("bcryptjs");
 
 class Member {
   constructor() {
@@ -11,6 +12,8 @@ class Member {
   // signup static method of Member class
   async signupData(input) {
     try {
+      const salt = await bcrypt.genSalt();
+      input.mb_password = await bcrypt.hash(input.mb_password, salt);
       const new_member = new this.memberModel(input);
 
       let result;
@@ -38,7 +41,10 @@ class Member {
 
       assert.ok(data, Definer.auth_err2);
 
-      const isMatched = input.mb_password === data.mb_password;
+      const isMatched = await bcrypt.compare(
+        input.mb_password,
+        data.mb_password
+      );
       assert.ok(isMatched, Definer.auth_err3);
 
       return await this.memberModel.findOne({ mb_nick: input.mb_nick }).exec();

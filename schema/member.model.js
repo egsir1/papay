@@ -23,7 +23,7 @@ const memberSchema = new mongoose.Schema(
     },
     mb_type: {
       type: String,
-      required: false,
+      // required: false,
       default: "USER",
       enum: {
         values: member_type_enums,
@@ -32,7 +32,7 @@ const memberSchema = new mongoose.Schema(
     },
     mb_status: {
       type: String,
-      required: false,
+      // required: false,
       default: "ACTIVE",
       enum: {
         values: member_status_enums,
@@ -45,23 +45,23 @@ const memberSchema = new mongoose.Schema(
     // },
     mb_address: {
       type: String,
-      required: false,
+      // required: false,
     },
     mb_description: {
       type: String,
-      required: false,
+      // required: false,
     },
     mb_image: {
       type: String,
-      required: false,
+      // required: false,
     },
     mb_point: {
       type: Number,
-      required: false,
+      // required: false,
     },
     mb_top: {
       type: String,
-      required: false,
+      // required: false,
       default: "N",
       enum: {
         values: ordenery_enums,
@@ -70,22 +70,22 @@ const memberSchema = new mongoose.Schema(
     },
     mb_views: {
       type: Number,
-      required: false,
+      // required: false,
       default: 0,
     },
     mb_likes: {
       type: Number,
-      required: false,
+      // required: false,
       default: 0,
     },
     mb_follow_cnt: {
       type: Number,
-      required: false,
+      // required: false,
       default: 0,
     },
     mb_subscriber_cnt: {
       type: Number,
-      required: false,
+      // required: false,
       default: 0,
     },
   },
