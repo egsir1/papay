@@ -7,7 +7,7 @@ memberController.signup = async (req, res) => {
     const data = req.body;
     const member = new Member();
     const new_member = await member.signupData(data);
-
+    res.send("SIGNUP");
     res.json({ state: "success", data: new_member });
   } catch (err) {
     console.log(`Errorr: ${err.message}`);
