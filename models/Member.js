@@ -24,7 +24,6 @@ class Member {
         console.log(mongo_err);
         throw new Error(Definer.auth_err1);
       }
-
       result.mb_password = "";
       return result;
     } catch (err) {
@@ -50,6 +49,7 @@ class Member {
       return await this.memberModel.findOne({ mb_nick: input.mb_nick }).exec();
       //console.log("member::", data);
     } catch (err) {
+      console.log("BcryptError:", err);
       throw err;
     }
   }
