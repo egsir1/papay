@@ -4,6 +4,7 @@ const router = require("./router");
 const router_bssr = require("./router_bssr");
 const session = require("express-session");
 
+<<<<<<< HEAD
 // const db = require("./server").db();
 // const mongodb = require("mongodb");
 // let session = require("express-session");
@@ -12,6 +13,12 @@ const store = new MongoDBStore({
   uri: process.env.MONGO_URL,
   collection: "sessions",
 });
+=======
+// // MongoDB ni call qilamiz
+
+// const db = require("./server").db();
+// const mongodb = require("mongodb");
+>>>>>>> abf7c4f08a5f52718dcded0aa3c1960c2fe27d1f
 
 //1: Kirish code
 
