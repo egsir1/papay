@@ -36,6 +36,10 @@ restaurantController.signupProcess = async (req, res) => {
     // console.log(`req: ${req.body}`);
     req.session.member = new_member;
     res.redirect("/resto/products/menu");
+    // console.log(`req session: ${req.session}`);
+    // console.log(`req: ${req.body}`);
+    req.session.member = new_member;
+    res.redirect("/resto/products/menu");
   } catch (err) {
     console.log(`Errorr: ${err.message}`);
     res.json({ state: "fail", message: err.message });
@@ -60,6 +64,10 @@ restaurantController.loginProcess = async (req, res) => {
     const member = new Member();
     const result = await member.loginData(data);
 
+    req.session.member = result;
+    req.session.save(function () {
+      res.redirect("/resto/products/menu");
+    });
     req.session.member = result;
     req.session.save(function () {
       res.redirect("/resto/products/menu");
