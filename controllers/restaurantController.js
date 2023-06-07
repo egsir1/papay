@@ -6,7 +6,7 @@ restaurantController.getMyRestaurantData = async (req, res) => {
   try {
     console.log("GET: cont/getMyRestaurantData");
 
-    //TODO Get my restaurant products
+    //TODO: Get my restaurant products
 
     res.render("restaurant-menu");
   } catch (err) {
@@ -34,10 +34,7 @@ restaurantController.signupProcess = async (req, res) => {
 
     // console.log(`req session: ${req.session}`);
     // console.log(`req: ${req.body}`);
-    req.session.member = new_member;
-    res.redirect("/resto/products/menu");
-    // console.log(`req session: ${req.session}`);
-    // console.log(`req: ${req.body}`);
+    console.log(req.session);
     req.session.member = new_member;
     res.redirect("/resto/products/menu");
   } catch (err) {

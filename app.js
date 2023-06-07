@@ -3,11 +3,10 @@ const app = express();
 const router = require("./router");
 const router_bssr = require("./router_bssr");
 
-const session = require("express-session");
-
 // const db = require("./server").db();
 // const mongodb = require("mongodb");
 // let session = require("express-session");
+const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const store = new MongoDBStore({
   uri: process.env.MONGO_URL,
@@ -33,7 +32,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+//browserga sessionni jonatish
 app.use((req, res, next) => {
   res.locals.member = req.session.member;
   next();
