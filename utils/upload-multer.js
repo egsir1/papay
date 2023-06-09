@@ -10,8 +10,11 @@ const getTargetImageStorage = (address) => {
       cb(null, `./uploads/${address}`);
     },
     filename: function (req, file, cb) {
-      console.log(file);
+      // console.log("multer-req:", req.member);
+      // console.log("multer-file:", file);
+      // console.log("multer-cb:", cb);
       const extension = path.parse(file.originalname).ext;
+      // console.log("extension::::", extension);
       const random_name = uuid.v4() + extension;
       cb(null, random_name);
     },

@@ -90,7 +90,11 @@ restaurantController.checkSessions = (req, res) => {
 
 restaurantController.validateAuthRestaurant = (req, res, next) => {
   if (req.session?.member?.mb_type === "RESTAURANT") {
+    console.log("req-session:", req.session);
+
+    console.log("req-member:", req.member);
     req.member = req.session.member;
+    console.log("req-member-2:", req.member);
     next();
   } else
     res.json({
