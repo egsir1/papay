@@ -45,9 +45,8 @@ class Member {
         data.mb_password
       );
       assert.ok(isMatched, Definer.auth_err3);
-
-      return await this.memberModel.findOne({ mb_nick: input.mb_nick }).exec();
       //console.log("member::", data);
+      return await this.memberModel.findOne({ mb_nick: input.mb_nick }).exec();
     } catch (err) {
       console.log("BcryptError:", err);
       throw err;

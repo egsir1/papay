@@ -3,6 +3,16 @@ const Product = require("../models/Product");
 
 const restaurantController = module.exports;
 
+restaurantController.home = (req, res) => {
+  try {
+    console.log("GET: cont/home");
+    res.render("home-page");
+  } catch (err) {
+    console.log(`ERROR: cont/home, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};
+
 restaurantController.getMyRestaurantProducts = async (req, res) => {
   try {
     console.log("GET: cont/getMyRestaurantProducts");
@@ -12,6 +22,7 @@ restaurantController.getMyRestaurantProducts = async (req, res) => {
 
     const product = new Product();
     const data = await product.getAllProductsDataResto(res.locals.member);
+    console.log("data from getMyRestDataProduct::", data);
     res.render("restaurant-menu", { restaurant_data: data });
   } catch (err) {
     console.log(`ERROR: cont/getMyRestaurantData, ${err.message}`);
@@ -36,9 +47,9 @@ restaurantController.signupProcess = async (req, res) => {
     const member = new Member();
     const new_member = await member.signupData(data);
 
-    // console.log(`req session: ${req.session}`);
-    // console.log(`req: ${req.body}`);
-    console.log(req.session);
+    console.log(`req session from res/cont: ${req.session}`);
+    console.log(`req.body from res/cont: ${req.body}`);
+
     req.session.member = new_member;
     res.redirect("/resto/products/menu");
   } catch (err) {
@@ -61,15 +72,21 @@ restaurantController.getLoginMyRestaurant = async (req, res) => {
 restaurantController.loginProcess = async (req, res) => {
   try {
     console.log("POST: cont/login");
+
+    console.log(`req session from res/cont/loginPro: ${req.session}`);
+    console.log(`req.body from res/cont:/loginPro ${req.body}`);
     const data = req.body;
     const member = new Member();
     const result = await member.loginData(data);
-
+    console.log(
+      "req.session.member from res/cont/loginPro-1",
+      req.session.member
+    );
     req.session.member = result;
-    req.session.save(function () {
-      res.redirect("/resto/products/menu");
-    });
-    req.session.member = result;
+    console.log(
+      "req.session.member from res/cont/loginPro-2",
+      req.session.member
+    );
     req.session.save(function () {
       res.redirect("/resto/products/menu");
     });
