@@ -5,6 +5,8 @@ const restaurantController = module.exports;
 
 restaurantController.home = (req, res) => {
   try {
+    console.log("home-body", req.body);
+    console.log("home-member", req.member);
     console.log("GET: cont/home");
     res.render("home-page");
   } catch (err) {
@@ -73,22 +75,24 @@ restaurantController.loginProcess = async (req, res) => {
   try {
     console.log("POST: cont/login");
 
-    console.log(`req session from res/cont/loginPro: ${req.session}`);
-    console.log(`req.body from res/cont:/loginPro ${req.body}`);
+    // console.log(`req session from res/cont/loginPro: ${req.session}`);
+    // console.log(`req.body from res/cont:/loginPro ${req.body}`);
     const data = req.body;
     const member = new Member();
     const result = await member.loginData(data);
-    console.log(
-      "req.session.member from res/cont/loginPro-1",
-      req.session.member
-    );
+    // console.log(
+    //   "req.session.member from res/cont/loginPro-1",
+    //   req.session.member
+    // );
     req.session.member = result;
-    console.log(
-      "req.session.member from res/cont/loginPro-2",
-      req.session.member
-    );
+    // console.log(
+    //   "req.session.member from res/cont/loginPro-2",
+    //   req.session.member
+    // );
     req.session.save(function () {
-      res.redirect("/resto/products/menu");
+      result.mb_type === "ADMIN"
+        ? res.redirect("/resto/all-restaurant")
+        : res.redirect("/resto/products/menu");
     });
   } catch (err) {
     console.log(`Errorr: ${err.message}`);

@@ -35,14 +35,14 @@ app.use(
 
 //browserga sessionni jonatish
 app.use((req, res, next) => {
-  console.log("app.js=> res.locals-1::", res.locals);
-  console.log("app.js=> req.session.member-1", req.session.member);
+  // console.log("app.js=> res.locals-1::", res.locals);
+  // console.log("app.js=> req.session.member-1", req.session.member);
 
   //////////////////////////////////////
   res.locals.member = req.session.member;
   ///////////////////////////////////////
-  console.log("app.js=> res.locals-2::", res.locals);
-  console.log("app.js=> req.session.member-2", req.session.member);
+  // console.log("app.js=> res.locals-2::", res.locals);
+  // console.log("app.js=> req.session.member-2", req.session.member);
   next();
 });
 
