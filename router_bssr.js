@@ -3,6 +3,8 @@ const router_bssr = express.Router();
 const restaurantController = require("./controllers/restaurantController");
 const productController = require("./controllers/productController");
 const uploader_product = require("./utils/upload-multer")("products");
+const uploader_member = require("./utils/upload-multer")("members");
+
 // const { uploadProductImage } = require("./utils/upload-multer");
 /******************
  *    BSSR EJS   *
@@ -11,7 +13,11 @@ router_bssr.get("/", restaurantController.home);
 
 router_bssr
   .get("/signup", restaurantController.getSignupMyRestaurant)
-  .post("/signup", restaurantController.signupProcess);
+  .post(
+    "/signup",
+    uploader_member.single("restaurant_img"),
+    restaurantController.signupProcess
+  );
 
 router_bssr
   .get("/login", restaurantController.getLoginMyRestaurant)

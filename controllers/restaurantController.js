@@ -1,5 +1,7 @@
+const assert = require("assert");
 const Member = require("../models/Member");
 const Product = require("../models/Product");
+const Definer = require("../lib/errors");
 
 const restaurantController = module.exports;
 
@@ -45,14 +47,24 @@ restaurantController.getSignupMyRestaurant = async (req, res) => {
 restaurantController.signupProcess = async (req, res) => {
   try {
     console.log("POST: cont/signup");
-    const data = req.body;
+    // console.log("body:", req.body);
+    // console.log("file:", req.file);
+    assert(req.file, Definer.general_err3);
+
+    let new_member = req.body;
+    new_member.mb_type = "RESTAURANT";
+    new_member.mb_image = req.file.path;
+
     const member = new Member();
-    const new_member = await member.signupData(data);
+    ``;
+    const result = await member.signupData(new_member);
 
-    console.log(`req session from res/cont: ${req.session}`);
-    console.log(`req.body from res/cont: ${req.body}`);
+    assert(result, Definer.general_err1);
 
-    req.session.member = new_member;
+    // console.log(`req session from res/cont: ${req.session}`);
+    // console.log(`req.body from res/cont: ${req.body}`);
+
+    req.session.member = result;
     res.redirect("/resto/products/menu");
   } catch (err) {
     console.log(`Errorr: ${err.message}`);
