@@ -107,14 +107,21 @@ restaurantController.loginProcess = async (req, res) => {
         : res.redirect("/resto/products/menu");
     });
   } catch (err) {
-    console.log(`Errorr: ${err.message}`);
+    console.log(`Errorr, cont/loginProcess: ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
 
 restaurantController.logout = (req, res) => {
-  console.log("GET cont.logout");
-  res.send("Logout sahifasidasiz");
+  try {
+    console.log("GET cont.logout");
+    req.session.destroy(function () {
+      res.redirect("/resto");
+    });
+  } catch (err) {
+    console.log(`Errorr, cont/logoutProcess: ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
 };
 
 restaurantController.checkSessions = (req, res) => {
