@@ -42,4 +42,9 @@ router_bssr.post(
   productController.updateChoosenProduct
 );
 
+router_bssr.get(
+  "/all-restaurant",
+  restaurantController.validateAdmin,
+  restaurantController.getAllRestaurants
+);
 module.exports = router_bssr;

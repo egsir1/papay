@@ -146,3 +146,33 @@ restaurantController.validateAuthRestaurant = (req, res, next) => {
       message: "only authenticated members with restaurant type",
     });
 };
+
+restaurantController.validateAdmin = (req, res, next) => {
+  if (req.session?.member?.mb_type === "ADMIN") {
+    // console.log("req-session:", req.session);
+
+    // console.log("req-member:", req.member);
+    req.member = req.session.member;
+    // console.log("req-member-2:", req.member);
+    next();
+  } else {
+    const html = `<script>
+    alert('Admin Page: Permission denied!');
+    window.location.replace("/resto");
+    </script>`;
+
+    res.end(html);
+  }
+};
+
+restaurantController.getAllRestaurants = (req, res) => {
+  try {
+    console.log("GET cont/getAllRestaurants");
+    //todo: hamma restaurant larni dbdan chaqiramiz
+
+    res.render("all-restaurant");
+  } catch (err) {
+    console.log(`Errorr, cont/getAllRestaurants: ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};
