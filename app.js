@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const router = require("./router");
 const router_bssr = require("./router_bssr");
+const cookieParser = require("cookie-parser");
 
 // const db = require("./server").db();
 // const mongodb = require("mongodb");
@@ -18,6 +19,7 @@ const store = new MongoDBStore({
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //2: Session code
 
@@ -40,7 +42,7 @@ app.use((req, res, next) => {
 
   //////////////////////////////////////
   res.locals.member = req.session.member;
-  ///////////////////////////////////////
+  ///////////////////////////////////////;
   // console.log("app.js=> res.locals-2::", res.locals);
   // console.log("app.js=> req.session.member-2", req.session.member);
   next();

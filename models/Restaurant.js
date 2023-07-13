@@ -22,6 +22,7 @@ class Restaurant {
   }
 
   async updateRestaurantByAdminData(updated_data) {
+    console.log("Rest:update:", updated_data);
     try {
       const id = shapeIntoMongooseObjectId(updated_data?.id);
 

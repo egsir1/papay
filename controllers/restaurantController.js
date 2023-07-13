@@ -57,7 +57,7 @@ restaurantController.signupProcess = async (req, res) => {
     new_member.mb_image = req.file.path;
 
     const member = new Member();
-    ``;
+
     const result = await member.signupData(new_member);
 
     assert(result, Definer.general_err1);
@@ -150,11 +150,10 @@ restaurantController.validateAuthRestaurant = (req, res, next) => {
 
 restaurantController.validateAdmin = (req, res, next) => {
   if (req.session?.member?.mb_type === "ADMIN") {
-    // console.log("req-session:", req.session);
+    console.log("req-member-1:", req.member);
+    // req.member = req.session.member;
 
-    // console.log("req-member:", req.member);
-    req.member = req.session.member;
-    // console.log("req-member-2:", req.member);
+    console.log("req-member-2:", req.member);
     next();
   } else {
     const html = `<script>
@@ -173,6 +172,7 @@ restaurantController.getAllRestaurants = async (req, res) => {
     const restaurant = new Restaurant();
 
     const restaurants_data = await restaurant.getAllRestaurantsData();
+    // console.log("rest_data:", restaurants_data);
     res.render("all-restaurant", { restaurants_data: restaurants_data });
   } catch (err) {
     console.log(`Errorr, cont/getAllRestaurants: ${err.message}`);

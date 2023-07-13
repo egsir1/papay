@@ -226,6 +226,7 @@
   </div>
 
   <script>
+    // either product_size or product_volume logic
     $(function () {
       $(".product_collection").on("change", () => {
         const selected_value = $(".product_collection").val();
@@ -238,6 +239,9 @@
         }
       });
 
+      
+    // show form for adding new items
+
       $(".hiding_btn").on("click", () => {
         $(".dish_container").slideToggle(500);
         $(".hiding_btn").css("display", "none");
@@ -247,15 +251,21 @@
 
       $(".new_product_status").on("change", async function (e) {
         const id = e.target.id;
+        console.log('e.target', e.target)
+        console.log('id:', id)
         const product_status = $(`#${id}.new_product_status`).val();
+        console.log('product_status:', product_status)
+
 
         try {
           const response = await axios.post(`/resto/products/edit/${id}`, {
             id: id,
             product_status: product_status,
           });
-
+          
           const result = response.data;
+          console.log('response:', response)
+          console.log('result:', result)
 
           if (result.state == "success") {
             alert("success");
@@ -294,10 +304,11 @@
 
     function previewFileHandler(input, order) {
       const image_class_name = input.className;
-      // console.log('input:', input)
-      const file = $(`.${image_class_name}`).get(0).files[0],
-        // console.log('file:', file)
-        fileType = file["type"],
+      console.log('input:', input)
+      console.log('img_class_name', image_class_name)
+      const file = $(`.${image_class_name}`).get(0).files[0];
+        console.log('file:', file);
+    const    fileType = file["type"],
         validImgType = ["image/jpg", "image/jpeg", "image/png"];
       console.log("input:", input);
       console.log("order:", order);
